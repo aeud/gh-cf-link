@@ -3,6 +3,9 @@ const {Storage} = require('@google-cloud/storage')
 const request = require('request')
 const projectId = 'ae-lab'
 
+const ghPass = process.env['GITHUB_PASS']
+const ghUser = process.env['GITHUB_USER']
+
 const storage = new Storage({
     projectId: projectId,
 })
@@ -30,14 +33,14 @@ exports.helloWorld = (req, res) => {
     slack('New Cloud Function udpate...').then(console.log).catch(console.error)
     request
     .get({
-        url: 'https://api.github.com/repos/LVMH-DIGITAL-DATA/central-process-oos/zipball',
+        url: 'https://api.github.com/repos/aeud/gh-cf-link/zipball',
         headers: {
             'User-Agent': 'My app',
         },
         followAllRedirects: true,
         auth: {
-            user: 'aeud',
-            pass: '9b18e1cd9a1fff69d85da6d4e35ae0095c5416fe'
+            user: ghUser,
+            pass: ghPass
         }
     })
     .on('end', () => {
