@@ -1,14 +1,16 @@
 {
-  "name": "gh-cf-link",
-  "version": "0.0.1",
-  "dependencies": {
-    "async": "^2.6.1"
-  },
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "description": ""
-}
+    "name": "gh-cf-link",
+    "version": "0.0.1",
+    "dependencies": {
+      "@google-cloud/storage": "^2.3.1",
+      "async": "^2.6.1"
+    },
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": ""
+  }
+  
