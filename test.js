@@ -1,4 +1,8 @@
 const index = require('./index')
-index.helloWorld({}, {
+index.helloWorld({
+    body: {
+        payload: '{}'
+    }
+}, {
     json: console.log
 });
