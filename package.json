@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "dependencies": {
     "@google-cloud/storage": "^2.3.1",
-    "request": "^2.88.0"
+    "archiver": "^3.0.0",
+    "dotenv": "^6.2.0",
+    "request": "^2.88.0",
+    "unzip": "^0.1.11"
   },
   "main": "index.js",
   "scripts": {
