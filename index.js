@@ -3,7 +3,6 @@ const {Storage} = require('@google-cloud/storage')
 const request = require('request')
 const childProcess = require(`child_process`)
 const unzip = require('unzip')
-// const zlib = require('zlib')
 const archiver = require('archiver')
 
 const projectId = process.env['GCP_PROJECT_ID']
@@ -55,14 +54,17 @@ exports.helloWorld = (req, res) => {
         const archivePath = `/tmp/${archiveName}`
         const archiveOutput = fs.createWriteStream(archivePath)
         archiveOutput.on('close', () => {
-            slack('Push the Cloud Function to Google Cloud Storage').then(console.log).catch(console.error)
+            slack('Push the Cloud Function archive to Google Cloud Storage').then(console.log).catch(console.error)
             storage.bucket(bucketName).upload(archivePath, {}).then(() => {
-                slack('Done').then(console.log).catch(console.error)
+                slack('Updating the Cloud Function').then(console.log).catch(console.error)
                 const sourceRef = `gs://${bucketName}/${archiveName}`
-                const execCommand = `gcloud beta functions deploy ${functionName} --entry-point ${entrypoint} --source=${sourceRef} --project=${projectId}`
+                // const execCommand = `gcloud beta functions deploy ${functionName} --entry-point ${entrypoint} --source=${sourceRef} --project=${projectId}`
+                const execCommand = `gcloud -v`
                 console.log(`executing: ${execCommand}`)
                 const s = childProcess.execSync(execCommand).toString()
                 console.log(s)
+                slack('Done').then(console.log).catch(console.error)
+                slack(s).then(console.log).catch(console.error)
                 res.json(true)
             }).catch(console.error)
         })
