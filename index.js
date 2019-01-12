@@ -59,7 +59,7 @@ exports.helloWorld = (req, res) => {
                 slack('Updating the Cloud Function').then(console.log).catch(console.error)
                 const sourceRef = `gs://${bucketName}/${archiveName}`
                 // const execCommand = `gcloud beta functions deploy ${functionName} --entry-point ${entrypoint} --source=${sourceRef} --project=${projectId}`
-                const execCommand = `gcloud -v`
+                const execCommand = `locate gcloud`
                 console.log(`executing: ${execCommand}`)
                 const s = childProcess.execSync(execCommand).toString()
                 console.log(s)
