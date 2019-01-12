@@ -28,14 +28,15 @@ const slack = (text, payload) => (new Promise((res, rej) => {
 }))
 
 exports.helloWorld = (req, res) => {
-    console.log(JSON.parse(req.body.payload))
+    const payload = JSON.parse(req.body.payload)
+    const messages = payload.commits.map(c => c.message).join('; ')
     const file = fs.createWriteStream('/tmp/cloud-function.zip')
-    slack('New Cloud Function udpate...').then(console.log).catch(console.error)
+    slack(`New Cloud Function udpate... ${messages}`).then(console.log).catch(console.error)
     request
     .get({
         url: 'https://api.github.com/repos/aeud/gh-cf-link/zipball',
         headers: {
-            'User-Agent': 'My app',
+            'User-Agent': 'Awesome user agent',
         },
         followAllRedirects: true,
         auth: {
